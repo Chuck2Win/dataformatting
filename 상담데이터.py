@@ -9,6 +9,7 @@ for _,i in enumerate(data_list):
     F = open(os.path.join(output_dir,'상담_데이터_%d.txt'%(_+1)),'w',encoding = 'utf-8')
     out_path = os.path.join(input_dir, i)
     out_list = os.listdir(out_path)
+    result = set()
     for j in tqdm(out_list):
         new_path = os.path.join(out_path, j)
         inner_path = [i for i in os.listdir(new_path) if i.endswith('txt')]
@@ -16,6 +17,8 @@ for _,i in enumerate(data_list):
         data = open(new_path,'r', encoding = 'utf-8').read()
         # 개행문자, 스페이스바 도 없애준다.
         data = data.strip()
-        F.write(data)
+        result.add(data)
+    for x in result:    
+        F.write(x)
         F.write('\n\n')
     F.close()    
